@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleConfigForm } from '../../components';
 import { Button, Space } from 'antd';
 import { CodeTwoTone } from '@ant-design/icons';
 import vkbeautify from 'vkbeautify';
 import { apiClient } from '../../utils/apiClient';
+import { StyleConfigVersions } from '../../components/StyleConfigVersions';
+import { ConfigContext } from '../../contexts/ConfigContext';
 
 const StyleConfig = () => {
+    const { oldVersions, configs, setActiveVersion, activeVersion } =
+        useContext(ConfigContext);
+
     const [formAmt, setFormAmt] = useState([0]);
+    const [defaultVals, setDefaultVals] = useState(activeVersion);
     const [cssPreview, setCssPreview] = useState(null);
     const [allForms, addToAllForms] = useState([]);
+
+    useEffect(() => {
+        setActiveVersion(activeVersion);
+    }, [activeVersion]);
 
     const getAllFormData = () => {
         return allForms
@@ -72,13 +82,19 @@ const StyleConfig = () => {
             </header>
             <div
                 style={{
-                    width: '80%',
                     margin: 'auto',
                     marginTop: '3em',
                     display: 'flex',
+                    justifyContent: 'space-around',
                 }}
             >
-                <div stlye={{}}>
+                <div>
+                    {activeVersion && (
+                        <StyleConfigForm
+                            addToAllForms={addToAllForms}
+                            defaultVals={defaultVals}
+                        />
+                    )}
                     {formAmt.map((i, idx) => (
                         <div
                             style={{
@@ -157,6 +173,13 @@ const StyleConfig = () => {
                             </Button>
                         </Space>
                     </div>
+                </div>
+                <div>
+                    <StyleConfigVersions
+                        oldVersions={oldVersions}
+                        configs={configs}
+                        setActiveVersion={setActiveVersion}
+                    />
                 </div>
                 <div style={{ marginLeft: '20%' }}>
                     <pre>

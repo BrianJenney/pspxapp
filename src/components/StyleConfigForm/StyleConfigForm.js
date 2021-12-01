@@ -3,10 +3,25 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 
-const StyleConfigForm = ({ addToAllForms }) => {
+const StyleConfigForm = ({ addToAllForms, defaultVals }) => {
+    console.log(defaultVals);
+    const defaultStyles = (defaultVals?.styles || []).map(
+        (styleRule) => styleRule.styles
+    );
+
+    console.log(
+        defaultStyles.map((s) => ({
+            rule: s.split(':')[0],
+            val: s.split(':'[1]),
+        }))
+    );
+
     const { control, formState, register, reset, getValues } = useForm({
         defaultValues: {
-            styles: [],
+            styles: defaultStyles.map((s) => ({
+                rule: s.split(':')[0],
+                val: s.split(':'[1]),
+            })),
         },
     });
 
