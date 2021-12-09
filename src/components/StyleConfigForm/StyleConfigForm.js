@@ -3,27 +3,8 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 
-const StyleConfigForm = ({ addToAllForms, defaultVals }) => {
-    console.log(defaultVals);
-    const defaultStyles = (defaultVals?.styles || []).map(
-        (styleRule) => styleRule.styles
-    );
-
-    console.log(
-        defaultStyles.map((s) => ({
-            rule: s.split(':')[0],
-            val: s.split(':'[1]),
-        }))
-    );
-
-    const { control, formState, register, reset, getValues } = useForm({
-        defaultValues: {
-            styles: defaultStyles.map((s) => ({
-                rule: s.split(':')[0],
-                val: s.split(':'[1]),
-            })),
-        },
-    });
+const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
+    const { control, formState, register, reset, getValues } = useForm({});
 
     const { errors } = formState;
 
@@ -34,10 +15,29 @@ const StyleConfigForm = ({ addToAllForms, defaultVals }) => {
     });
 
     useEffect(() => {
-        reset({
-            styles: [{ rule: '', val: '' }],
-        });
-    }, [reset]);
+        const formattedStyles = defaultVals.styles.map((style) => ({
+            rule: style.split(': ')[0],
+            val: style.split(': ')[1],
+        }));
+
+        if (formattedStyles.length) {
+            reset({
+                element: defaultVals.element,
+                maxWidth: defaultVals.maxWidth,
+                minWidth: defaultVals.minWidth,
+                styles: [...formattedStyles],
+            });
+        } else {
+            reset({
+                styles: [{ rule: '', val: '' }],
+            });
+        }
+    }, [
+        defaultVals.element,
+        defaultVals.maxWidth,
+        defaultVals.minWidth,
+        ...defaultVals.styles,
+    ]);
 
     useEffect(() => {
         addToAllForms((prev) => [...prev, getValues]);

@@ -29,7 +29,13 @@ export const ConfigContextProvider = ({ children }) => {
 
     return (
         <ConfigContext.Provider
-            value={{ configs, oldVersions, setActiveVersion, activeVersion }}
+            value={{
+                configs,
+                oldVersions,
+                setActiveVersion,
+                activeVersion,
+                setConfigs,
+            }}
         >
             {children}
         </ConfigContext.Provider>

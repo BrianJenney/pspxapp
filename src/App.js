@@ -4,7 +4,7 @@ import { ConfigContextProvider } from './contexts/ConfigContext';
 
 function App() {
     return (
-        <div style={{ margin: '1em' }}>
+        <div>
             <ConfigContextProvider>
                 <StyleConfig />
             </ConfigContextProvider>
