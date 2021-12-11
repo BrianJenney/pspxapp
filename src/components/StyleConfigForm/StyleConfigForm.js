@@ -41,6 +41,9 @@ const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
 
     useEffect(() => {
         addToAllForms((prev) => [...prev, getValues]);
+        return () => {
+            reset({});
+        };
     }, [addToAllForms]);
 
     return (

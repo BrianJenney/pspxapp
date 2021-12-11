@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleConfig } from './pages/StyleConfig';
+import { StyleConfigContainer } from './pages/StyleConfig';
 import { ConfigContextProvider } from './contexts/ConfigContext';
 
 function App() {
     return (
         <div>
             <ConfigContextProvider>
-                <StyleConfig />
+                <StyleConfigContainer />
             </ConfigContextProvider>
         </div>
     );

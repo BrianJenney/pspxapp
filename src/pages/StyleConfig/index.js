@@ -1,1 +1,1 @@
-export { default as StyleConfig } from './StyleConfig';
+export { default as StyleConfigContainer } from './StyleConfigContainer';
