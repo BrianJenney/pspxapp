@@ -4,7 +4,9 @@ import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 
 const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
-    const { control, formState, register, reset, getValues } = useForm({});
+    const { control, formState, register, reset, getValues } = useForm({
+        readOnly: true,
+    });
 
     const { errors } = formState;
 
