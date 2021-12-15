@@ -1,30 +1,38 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { StyleConfigContainer } from './pages/StyleConfig';
-import { SignIn } from './pages/SignIn';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Badge } from 'antd';
+import PageRoutes from './components/Routes';
+import LogoutButton from './components/LogoutButton';
 import { ConfigContextProvider } from './contexts/ConfigContext';
-import { Auth0Provider } from '@auth0/auth0-react';
+import { UserContextProvider } from './contexts/UserContext';
 
 const App = () => {
     return (
         <div>
-            <Auth0Provider
-                domain={process.env.OAUTH_DOMAIN}
-                clientId={process.env.OAUTH_CLIENT_ID}
-                redirectUri={window.location.origin}
-            >
-                <ConfigContextProvider>
-                    <Router>
-                        <Routes>
-                            <Route path="/" element={<SignIn />} />
-                            <Route
-                                path="/configs"
-                                element={<StyleConfigContainer />}
-                            />
-                        </Routes>
-                    </Router>
-                </ConfigContextProvider>
-            </Auth0Provider>
+            <ConfigContextProvider>
+                <UserContextProvider>
+                    <Badge.Ribbon
+                        style={{ right: 0 }}
+                        placement="end"
+                        text="Beta"
+                    ></Badge.Ribbon>
+                    <Router>{<PageRoutes />}</Router>
+                    <footer
+                        style={{
+                            width: '100%',
+                            position: 'sticky',
+                            bottom: 0,
+                            backgroundColor: 'rgb(38, 38, 38)',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            padding: '1em',
+                            marginTop: '1em',
+                        }}
+                    >
+                        <LogoutButton />
+                    </footer>
+                </UserContextProvider>
+            </ConfigContextProvider>
         </div>
     );
 };

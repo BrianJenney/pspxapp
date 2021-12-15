@@ -3,7 +3,11 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 
-const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
+const StyleConfigForm = ({
+    addToAllForms,
+    defaultVals = { styles: [] },
+    isEditable = true,
+}) => {
     const { control, formState, register, reset, getValues } = useForm({
         readOnly: true,
     });
@@ -57,6 +61,7 @@ const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
                         control={control}
                         render={({ field }) => (
                             <Input
+                                disabled={!isEditable}
                                 {...register('element', {
                                     required: true,
                                 })}
@@ -76,6 +81,8 @@ const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
                                 control={control}
                                 render={({ field }) => (
                                     <Input
+                                        type="number"
+                                        disabled={!isEditable}
                                         {...register('maxWidth')}
                                         placeholder="Max Width (for media queries)"
                                         {...field}
@@ -87,6 +94,8 @@ const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
                                 control={control}
                                 render={({ field }) => (
                                     <Input
+                                        type="number"
+                                        disabled={!isEditable}
                                         {...register('minWidth')}
                                         placeholder="Min Width (for media queries)"
                                         {...field}
@@ -108,6 +117,7 @@ const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
                                                 {...register('rule', {
                                                     required: true,
                                                 })}
+                                                disabled={!isEditable}
                                                 placeholder="property (ex: color)"
                                                 {...field}
                                             />
@@ -122,26 +132,31 @@ const StyleConfigForm = ({ addToAllForms, defaultVals = { styles: [] } }) => {
                                                 {...register('val', {
                                                     required: true,
                                                 })}
+                                                disabled={!isEditable}
                                                 placeholder="property value (ex: green)"
                                                 {...field}
                                             />
                                         )}
                                     />
-                                    <Space>
-                                        {index > 0 && (
-                                            <MinusCircleOutlined
-                                                onClick={() => remove(index)}
+                                    {isEditable && (
+                                        <Space>
+                                            {index > 0 && (
+                                                <MinusCircleOutlined
+                                                    onClick={() =>
+                                                        remove(index)
+                                                    }
+                                                />
+                                            )}
+                                            <PlusCircleOutlined
+                                                onClick={() => {
+                                                    append({
+                                                        rule: '',
+                                                        val: '',
+                                                    });
+                                                }}
                                             />
-                                        )}
-                                        <PlusCircleOutlined
-                                            onClick={() => {
-                                                append({
-                                                    rule: '',
-                                                    val: '',
-                                                });
-                                            }}
-                                        />
-                                    </Space>
+                                        </Space>
+                                    )}
                                 </Space>
                             </div>
                         ))}

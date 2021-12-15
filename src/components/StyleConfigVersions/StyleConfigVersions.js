@@ -7,6 +7,10 @@ const StyleConfigVersions = ({ configs, oldVersions, setActiveVersion }) => {
         return <></>;
     }
 
+    const sortByVersion = (versions) => {
+        return versions.sort((a, b) => (b.version < a.version ? -1 : 1));
+    };
+
     return (
         <Card>
             {configs.map((config) => (
@@ -31,14 +35,17 @@ const StyleConfigVersions = ({ configs, oldVersions, setActiveVersion }) => {
 
             <h3>Version History</h3>
 
-            {oldVersions.map((config) => (
+            {sortByVersion(oldVersions).map((config) => (
                 <div key={config.version}>
                     <Space
                         className="hover"
                         onClick={() => setActiveVersion(config)}
                     >
                         <p>V.{config.version}</p>
-                        <p>{config.createdAt || new Date().toLocaleString()}</p>
+                        <p>
+                            {new Date(config.createdAt).toLocaleString() ||
+                                new Date().toLocaleString()}
+                        </p>
                     </Space>
                 </div>
             ))}

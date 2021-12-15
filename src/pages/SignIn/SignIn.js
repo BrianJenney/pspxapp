@@ -2,10 +2,14 @@ import React from 'react';
 import LoginButton from '../../components/LoginButton';
 import { useAuth0 } from '@auth0/auth0-react';
 import DesignerAvatar from '../../assets/designer-avatar.svg';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
-    const { user, isAuthenticated, isLoading } = useAuth0();
-
+    const { isAuthenticated, isLoading } = useAuth0();
+    const navigate = useNavigate();
+    if (isAuthenticated) {
+        navigate('/configs');
+    }
     return (
         <div
             style={{
@@ -19,6 +23,7 @@ const SignIn = () => {
                     flexWrap: 'wrap',
                     justifyContent: 'space-around',
                     padding: '3em',
+                    height: '100%',
                 }}
             >
                 <section>

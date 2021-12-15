@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Space, Button, Tag, Modal, Switch } from 'antd';
+import { Space, Button, Tag, Modal, Switch, Tooltip } from 'antd';
 import { CodeTwoTone } from '@ant-design/icons';
 import { StyleConfigVersions } from '../../components/StyleConfigVersions';
 import { StyleConfigForm } from '../../components/StyleConfigForm';
@@ -99,38 +99,48 @@ const StyleConfig = ({
                                         <StyleConfigForm
                                             addToAllForms={addToAllForms}
                                             defaultVals={defaultVal}
+                                            isEditable={!isOldVersion}
                                         />
                                         <div>
                                             <Space>
-                                                <Button
-                                                    type="primary"
-                                                    style={{ marginTop: '2em' }}
-                                                    onClick={() =>
-                                                        setFormAmt((prev) => [
-                                                            ...prev,
-                                                            prev[
-                                                                prev.length - 1
-                                                            ] + 1,
-                                                        ])
-                                                    }
-                                                >
-                                                    Add New Rule
-                                                </Button>
-
-                                                {defaultVals.styles.length >
-                                                    1 && (
+                                                {!isOldVersion && (
                                                     <Button
-                                                        type="danger"
+                                                        type="primary"
                                                         style={{
                                                             marginTop: '2em',
                                                         }}
                                                         onClick={() =>
-                                                            removeRule(idx)
+                                                            setFormAmt(
+                                                                (prev) => [
+                                                                    ...prev,
+                                                                    prev[
+                                                                        prev.length -
+                                                                            1
+                                                                    ] + 1,
+                                                                ]
+                                                            )
                                                         }
                                                     >
-                                                        Remove Rule
+                                                        Add New Rule
                                                     </Button>
                                                 )}
+
+                                                {defaultVals.styles.length >
+                                                    1 &&
+                                                    !isOldVersion && (
+                                                        <Button
+                                                            type="danger"
+                                                            style={{
+                                                                marginTop:
+                                                                    '2em',
+                                                            }}
+                                                            onClick={() =>
+                                                                removeRule(idx)
+                                                            }
+                                                        >
+                                                            Remove Rule
+                                                        </Button>
+                                                    )}
                                             </Space>
                                         </div>
                                     </div>
@@ -182,20 +192,33 @@ const StyleConfig = ({
                     ))}
                     <div>
                         <Space>
-                            <Button
-                                type="primary"
-                                style={{ marginTop: '2em' }}
-                                onClick={() => saveAs('non-draft')}
+                            <Tooltip
+                                title={
+                                    isOldVersion
+                                        ? 'Revert to this version and activate'
+                                        : null
+                                }
+                                color="pink"
                             >
-                                Save
-                            </Button>
-                            <Button
-                                type="dashed"
-                                style={{ marginTop: '2em' }}
-                                onClick={() => saveAs('draft')}
-                            >
-                                Save as Draft
-                            </Button>
+                                <Button
+                                    type="primary"
+                                    style={{ marginTop: '2em' }}
+                                    onClick={() => saveAs('non-draft')}
+                                >
+                                    {isOldVersion
+                                        ? 'Save and Activate'
+                                        : 'Save'}
+                                </Button>
+                            </Tooltip>
+                            {!isOldVersion && (
+                                <Button
+                                    type="dashed"
+                                    style={{ marginTop: '2em' }}
+                                    onClick={() => saveAs('draft')}
+                                >
+                                    Save as Draft
+                                </Button>
+                            )}
                             <Button
                                 type="ghost"
                                 style={{ marginTop: '2em' }}
@@ -210,15 +233,20 @@ const StyleConfig = ({
                     </div>
                     {activeVersion && !activeVersion.draft && !isOldVersion && (
                         <Space align="center" style={{ marginTop: '1em' }}>
-                            <Switch
-                                checked={isActive}
-                                onChange={async (bool) => {
-                                    if (activeVersion) {
-                                        await updateActiveState(bool);
-                                    }
-                                    setIsActive(!isActive);
-                                }}
-                            />
+                            <Tooltip
+                                title="Activate this config to make these style changes live"
+                                color="pink"
+                            >
+                                <Switch
+                                    checked={isActive}
+                                    onChange={async (bool) => {
+                                        if (activeVersion) {
+                                            await updateActiveState(bool);
+                                        }
+                                        setIsActive(!isActive);
+                                    }}
+                                />
+                            </Tooltip>
                             <p
                                 style={{ marginTop: 0, marginBottom: 0 }}
                                 className={isActive ? 'active' : 'non-active'}
