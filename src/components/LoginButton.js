@@ -7,16 +7,13 @@ const LogoutButton = () => {
 
     return (
         <Button
-            style={{
-                background: 'pink',
-                borderColor: 'pink',
-            }}
             size="large"
+            type="primary"
             onClick={() =>
                 loginWithRedirect({ returnTo: window.location.origin })
             }
         >
-            Log In or Create Account
+            Create a FREE Account
         </Button>
     );
 };

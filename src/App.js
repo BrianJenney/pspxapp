@@ -7,6 +7,7 @@ import { ConfigContextProvider } from './contexts/ConfigContext';
 import { UserContextProvider } from './contexts/UserContext';
 
 const App = () => {
+    const isSignInPage = window.location.pathname === '/';
     return (
         <div>
             <ConfigContextProvider>
@@ -17,20 +18,22 @@ const App = () => {
                         text="Beta"
                     ></Badge.Ribbon>
                     <Router>{<PageRoutes />}</Router>
-                    <footer
-                        style={{
-                            width: '100%',
-                            position: 'sticky',
-                            bottom: 0,
-                            backgroundColor: 'rgb(38, 38, 38)',
-                            display: 'flex',
-                            flexDirection: 'row',
-                            padding: '1em',
-                            marginTop: '1em',
-                        }}
-                    >
-                        <LogoutButton />
-                    </footer>
+                    {!isSignInPage && (
+                        <footer
+                            style={{
+                                width: '100%',
+                                position: 'absolute',
+                                bottom: 0,
+                                backgroundColor: 'rgb(38, 38, 38)',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                padding: '1em',
+                                marginTop: '1em',
+                            }}
+                        >
+                            <LogoutButton />
+                        </footer>
+                    )}
                 </UserContextProvider>
             </ConfigContextProvider>
         </div>

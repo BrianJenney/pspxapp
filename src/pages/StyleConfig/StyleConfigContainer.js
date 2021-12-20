@@ -3,6 +3,7 @@ import { message } from 'antd';
 import vkbeautify from 'vkbeautify';
 import { apiClient } from '../../utils/apiClient';
 import { ConfigContext } from '../../contexts/ConfigContext';
+import { UserContext } from '../../contexts/UserContext';
 import StyleConfig from './StyleConfig';
 import './StyleConfig.css';
 
@@ -14,6 +15,8 @@ const StyleConfigContainer = () => {
         activeVersion,
         setConfigs,
     } = useContext(ConfigContext);
+
+    const { user } = useContext(UserContext);
 
     const [formAmt, setFormAmt] = useState([0]);
     const [defaultVals, setDefaultVals] = useState(null);
@@ -96,9 +99,11 @@ const StyleConfigContainer = () => {
             });
 
         try {
+            const spaceid = user.spaceId;
+
             if (activeVersion && activeVersion.draft) {
                 await apiClient('styles/savedraft', {
-                    spaceid: '123ABC',
+                    spaceid,
                     draftId: activeVersion?._id,
                 });
 
@@ -107,7 +112,7 @@ const StyleConfigContainer = () => {
             } else {
                 const res = await apiClient('styles/addconfig', {
                     isPreview,
-                    spaceid: '123ABC',
+                    spaceid,
                     styles: styleData,
                     isActive,
                 });

@@ -20,7 +20,7 @@ export const UserContextProvider = ({ children }) => {
                     {},
                     { method: 'GET' }
                 );
-                setUser(data.user);
+                setUser({ ...data.user, ...data.space });
             } catch (e) {
                 console.log(e);
             }

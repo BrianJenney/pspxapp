@@ -1,5 +1,6 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
 import { apiClient } from '../utils/apiClient';
+import { UserContext } from './UserContext';
 
 export const ConfigContext = createContext({
     configs: [],
@@ -12,11 +13,12 @@ export const ConfigContextProvider = ({ children }) => {
     const [configs, setConfigs] = useState([]);
     const [oldVersions, setOldVersions] = useState([]);
     const [activeVersion, setActiveVersion] = useState(null);
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         const fetchConfigs = async () => {
             const data = await apiClient(
-                'styles/getallconfigs?spaceid=123ABC',
+                `styles/getallconfigs?spaceid=${user.spaceId}`,
                 {},
                 { method: 'GET' }
             );
@@ -24,8 +26,8 @@ export const ConfigContextProvider = ({ children }) => {
             setOldVersions(data?.data?.versions);
             setActiveVersion(data?.data?.configs?.[0]);
         };
-        fetchConfigs();
-    }, []);
+        if (user?.spaceId) fetchConfigs();
+    }, [user?.spaceId]);
 
     return (
         <ConfigContext.Provider

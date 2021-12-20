@@ -1,0 +1,53 @@
+.textWhite {
+    color: #ffff;
+}
+
+.iconWidth {
+    width: 100px;
+}
+
+.smallIcon {
+    width: 50px;
+}
+
+.features {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.featureName {
+    font-weight: 300;
+}
+
+.steps {
+    text-align: center;
+}
+
+.steps h2 {
+    font-weight: 300;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.headerImg {
+    width: 70%;
+}
+
+@media only screen and (max-width: 850px) {
+    .header {
+        flex-wrap: wrap-reverse;
+    }
+
+    .headerImg {
+        width: 100%;
+    }
+
+    .features {
+        display: block;
+    }
+}
