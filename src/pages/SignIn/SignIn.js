@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginButton from '../../components/LoginButton';
+import { LoginButton } from '../../components';
 import { useAuth0 } from '@auth0/auth0-react';
 import DesignerAvatar from '../../assets/designer-avatar.svg';
 import { useNavigate } from 'react-router-dom';

@@ -1,0 +1,34 @@
+.link {
+    font-size: 1.25em;
+    font-weight: 200;
+}
+
+.linkWrapper {
+    display: flex;
+}
+
+.linkWrapper p {
+    margin: 0 10px;
+}
+
+.linkWrapper p:hover {
+    cursor: pointer;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.iconWrapper p {
+    margin: 0 10px;
+}
+
+.header {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid gray;
+    align-items: center;
+    height: 50px;
+}

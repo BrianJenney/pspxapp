@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Space, Button, Tag, Modal, Switch, Tooltip } from 'antd';
-import { CodeTwoTone } from '@ant-design/icons';
 import { StyleConfigVersions } from '../../components/StyleConfigVersions';
 import { StyleConfigForm } from '../../components/StyleConfigForm';
 import './StyleConfig.css';
@@ -53,18 +52,6 @@ const StyleConfig = ({
 
     return (
         <>
-            <header
-                style={{
-                    margin: 'auto',
-                    textAlign: 'center',
-                    flexWrap: 'wrap',
-                }}
-            >
-                <h1 style={{ backgroundColor: '#262626', color: '#ffff' }}>
-                    PSPX Rule Configurator{' '}
-                    <CodeTwoTone twoToneColor="#eb2f96" />
-                </h1>
-            </header>
             <div
                 style={{
                     margin: 'auto',
