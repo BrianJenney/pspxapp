@@ -15,8 +15,6 @@ export const ConfigContextProvider = ({ children }) => {
     const [activeVersion, setActiveVersion] = useState(null);
     const { user } = useContext(UserContext);
 
-    console.log({ user });
-
     useEffect(() => {
         const fetchConfigs = async () => {
             const data = await apiClient(

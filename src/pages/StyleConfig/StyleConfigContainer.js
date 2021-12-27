@@ -68,7 +68,7 @@ const StyleConfigContainer = () => {
         const retVal = allForms.map((getVals) => {
             return getVals();
         });
-        console.log(retVal);
+
         const allVals = retVal
             .filter((val) => val.element)
             .map((val) => generatePreview(val));

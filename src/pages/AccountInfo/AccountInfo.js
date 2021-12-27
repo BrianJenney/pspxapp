@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 import { Input, Button, Space } from 'antd';
+import { apiClient } from '../../utils/apiClient';
 
-const AccountInfoContainer = ({ user }) => {
+const AccountInfo = ({ user }) => {
     const [isHidden, setIsHidden] = useState(false);
+
+    const getCheckoutLink = async () => {
+        const sessionData = await apiClient('/payments/startcheckout', {
+            priceId: 'price_1KAPulJRPNNdaytq61FIfuRQ',
+            spaceId: user?.spaceId,
+            userId: user?._id,
+        });
+
+        if (sessionData?.data?.sessionUrl) {
+            window.location.href = sessionData.data.sessionUrl;
+        }
+    };
 
     return (
         <div
@@ -48,9 +61,12 @@ if (window.pspx) {
                         </pre>
                     </code>
                 </div>
+                <Button onClick={() => getCheckoutLink()}>
+                    Upgrade your account
+                </Button>
             </div>
         </div>
     );
 };
 
-export default AccountInfoContainer;
+export default AccountInfo;

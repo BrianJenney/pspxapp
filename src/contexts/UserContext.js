@@ -22,7 +22,7 @@ export const UserContextProvider = ({ children }) => {
                 );
                 setUser({ ...data?.data?.user, ...data?.data?.space });
             } catch (e) {
-                console.log(e);
+                throw e;
             }
         };
         if (auth0User?.sub) fetchUser();

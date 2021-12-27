@@ -157,22 +157,22 @@ const StyleConfig = ({
                                     >
                                         Add New Rule
                                     </Button>
-                                    {formAmt.length > 1 ||
-                                        (activeVersion && (
-                                            <Button
-                                                type="danger"
-                                                style={{ marginTop: '2em' }}
-                                                onClick={() =>
-                                                    setFormAmt((prev) => {
-                                                        return prev.filter(
-                                                            (a, i) => i !== idx
-                                                        );
-                                                    })
-                                                }
-                                            >
-                                                Remove Rule
-                                            </Button>
-                                        ))}
+                                    {((formAmt.length > 1 && idx > 0) ||
+                                        activeVersion) && (
+                                        <Button
+                                            type="danger"
+                                            style={{ marginTop: '2em' }}
+                                            onClick={() =>
+                                                setFormAmt((prev) => {
+                                                    return prev.filter(
+                                                        (a, i) => i !== idx
+                                                    );
+                                                })
+                                            }
+                                        >
+                                            Remove Rule
+                                        </Button>
+                                    )}
                                 </Space>
                             </div>
                         </div>
