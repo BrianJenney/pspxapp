@@ -1,0 +1,7 @@
+.fakeLink {
+    color: #1890ff;
+}
+
+.fakeLink:hover {
+    cursor: pointer;
+}

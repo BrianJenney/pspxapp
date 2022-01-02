@@ -9,9 +9,7 @@ import { NavBar } from './components';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe(
-    'pk_test_51JcVgwJRPNNdaytq72fJ1d3Pz9O3cPAONkDEAs09gAM7S5KXPHOgHNdpckgkAeH5qXwbkJABjG81ZX669ekuqnI800yr8fv97I'
-);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET);
 const App = () => {
     const isSignInPage = window.location.pathname === '/';
     return (
@@ -31,7 +29,6 @@ const App = () => {
                         {!isSignInPage && (
                             <footer
                                 style={{
-                                    width: '100%',
                                     position: 'absolute',
                                     bottom: 0,
                                     display: 'flex',

@@ -8,7 +8,7 @@ import styles from './Signin.module.css';
 const SignIn = () => {
     const { isAuthenticated, isLoading } = useAuth0();
     const navigate = useNavigate();
-    if (isAuthenticated) {
+    if (isAuthenticated && !isLoading) {
         navigate('/configs');
     }
     return (

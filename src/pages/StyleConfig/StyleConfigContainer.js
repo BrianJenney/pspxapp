@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { message } from 'antd';
+import { Loader } from '../../components';
 import vkbeautify from 'vkbeautify';
 import { apiClient } from '../../utils/apiClient';
 import { ConfigContext } from '../../contexts/ConfigContext';
 import { UserContext } from '../../contexts/UserContext';
 import StyleConfig from './StyleConfig';
-import './StyleConfig.css';
 
 const StyleConfigContainer = () => {
     const {
@@ -16,7 +16,7 @@ const StyleConfigContainer = () => {
         setConfigs,
     } = useContext(ConfigContext);
 
-    const { user } = useContext(UserContext);
+    const { user, isLoading } = useContext(UserContext);
 
     const [formAmt, setFormAmt] = useState([0]);
     const [defaultVals, setDefaultVals] = useState(null);
@@ -137,6 +137,10 @@ const StyleConfigContainer = () => {
             setActiveVersion((prev) => ({ ...prev, isActive: activeState }));
         }
     };
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <StyleConfig

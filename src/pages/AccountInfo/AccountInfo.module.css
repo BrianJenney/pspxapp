@@ -1,0 +1,19 @@
+.codeContainer {
+    overflow-x: scroll;
+    padding: 0 1em;
+}
+
+.accountInfoContainer {
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 5em;
+}
+
+@media screen and (max-width: 800px) {
+    .codeContainer {
+        margin-top: 2em;
+    }
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Space, Button, Tag, Modal, Switch, Tooltip } from 'antd';
 import { StyleConfigVersions } from '../../components/StyleConfigVersions';
 import { StyleConfigForm } from '../../components/StyleConfigForm';
-import './StyleConfig.css';
+import styles from './StyleConfig.module.css';
 
 const StyleConfig = ({
     setActiveVersion,
@@ -52,14 +52,7 @@ const StyleConfig = ({
 
     return (
         <>
-            <div
-                style={{
-                    margin: 'auto',
-                    marginTop: '3em',
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                }}
-            >
+            <div className={styles.styleConfigContainer}>
                 <div>
                     <>
                         {activeVersion && (
@@ -236,7 +229,11 @@ const StyleConfig = ({
                             </Tooltip>
                             <p
                                 style={{ marginTop: 0, marginBottom: 0 }}
-                                className={isActive ? 'active' : 'non-active'}
+                                className={
+                                    isActive
+                                        ? styles.active
+                                        : styles['non-active']
+                                }
                             >
                                 {isActive ? 'Active' : 'Not Activated'}
                             </p>

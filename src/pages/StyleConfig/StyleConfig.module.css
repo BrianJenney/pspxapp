@@ -1,0 +1,21 @@
+.non-active {
+    opacity: 0.7;
+}
+
+.styleConfigContainer {
+    margin: auto;
+    margin-top: 3em;
+    display: flex;
+    justify-content: space-around;
+}
+
+@media only screen and (max-width: 850px) {
+    .styleConfigContainer {
+        margin: auto;
+        margin-top: 3em;
+        display: flex;
+        padding: 0 1em;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+}

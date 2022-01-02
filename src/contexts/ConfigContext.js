@@ -18,7 +18,7 @@ export const ConfigContextProvider = ({ children }) => {
     useEffect(() => {
         const fetchConfigs = async () => {
             const data = await apiClient(
-                `styles/getallconfigs?spaceid=${user.spaceId}`,
+                `styles/getallconfigs?spaceid=${user.space_id}`,
                 {},
                 { method: 'GET' }
             );
