@@ -43,7 +43,7 @@ const StyleConfig = ({
             };
         });
 
-        addToAllForms(allForms.filter((a, i) => i !== idx));
+        addToAllForms(allForms.filter((a, i) => i === idx));
     };
 
     const isOldVersion = oldVersions

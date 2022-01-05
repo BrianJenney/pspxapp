@@ -99,7 +99,7 @@ const StyleConfigContainer = () => {
             });
 
         try {
-            const spaceid = user.spaceId;
+            const spaceid = user.spaceKey;
 
             if (activeVersion && activeVersion.draft) {
                 await apiClient('styles/savedraft', {

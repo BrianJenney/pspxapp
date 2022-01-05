@@ -27,7 +27,7 @@ export const UserContextProvider = ({ children }) => {
                     ...data?.data?.space,
                     ...data?.data?.user,
                     spaceUsers: [...data?.data?.spaceUsers],
-                    space_id: data?.data?.space?.spaceId,
+                    spaceKey: data?.data?.space?.spaceId,
                 });
                 setIsLoading(false);
             } catch (e) {

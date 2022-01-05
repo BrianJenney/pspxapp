@@ -32,7 +32,7 @@ const AccountInfo = ({ user, addOrRemoveUser }) => {
                 });
             },
             onCancel() {
-                console.log('Cancel');
+                return;
             },
         });
     };
@@ -58,7 +58,7 @@ const AccountInfo = ({ user, addOrRemoveUser }) => {
                 <Input
                     type={isHidden ? 'password' : 'text'}
                     disabled
-                    value={user?.space_id}
+                    value={user?.spaceKey}
                 />
                 <Button
                     onClick={() => setIsHidden(!isHidden)}
