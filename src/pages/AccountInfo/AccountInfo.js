@@ -40,8 +40,11 @@ const AccountInfo = ({ user, addOrRemoveUser }) => {
     // request a checkout link from stripe with the subscription id
     const getCheckoutLink = async () => {
         const sessionData = await apiClient('/payments/startcheckout', {
-            priceId: 'price_1KAPulJRPNNdaytq61FIfuRQ',
-            spaceId: user?.spaceId,
+            priceId:
+                process.env.REACT_APP_ENV === 'production'
+                    ? 'price_1K9sWAJRPNNdaytqzYdyr9Jm'
+                    : 'price_1KAPulJRPNNdaytq61FIfuRQ',
+            spaceId: user?.spaceKey,
             userId: user?._id,
         });
 
@@ -87,12 +90,22 @@ if (window.pspx) {
                         </pre>
                     </code>
                 </div>
-                {!user?.hasSubscription && (
-                    <Button onClick={() => getCheckoutLink()}>
-                        Upgrade your account
-                    </Button>
-                )}
                 <hr />
+                {!user?.hasSubscription && (
+                    <>
+                        <p>
+                            Want to add more users, get dedicated support from
+                            our engineering team and increase your monthly
+                            active user limit?
+                        </p>
+                        <Button
+                            type="primary"
+                            onClick={() => getCheckoutLink()}
+                        >
+                            Upgrade your account
+                        </Button>
+                    </>
+                )}
 
                 {user?.hasSubscription && (
                     <div>
@@ -118,7 +131,7 @@ if (window.pspx) {
                                             }
                                             width="20px"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            className="h-6 w-6"
+                                            className={styles.deleteIcon}
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"

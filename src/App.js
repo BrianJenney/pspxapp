@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Badge } from 'antd';
 import PageRoutes from './components/Routes';
@@ -11,7 +11,12 @@ import { Elements } from '@stripe/react-stripe-js';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET);
 const App = () => {
-    const isSignInPage = window.location.pathname === '/';
+    const [isSignInPage, setIsSignInPage] = useState(true);
+
+    useEffect(() => {
+        setIsSignInPage(window.location.pathname === '/');
+    }, []);
+
     return (
         <div>
             <Elements stripe={stripePromise}>
