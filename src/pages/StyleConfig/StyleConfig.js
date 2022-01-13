@@ -178,12 +178,13 @@ const StyleConfig = ({
                                         ? 'Revert to this version and activate'
                                         : null
                                 }
-                                color="pink"
                             >
                                 <Button
                                     type="primary"
                                     style={{ marginTop: '2em' }}
-                                    onClick={() => saveAs('non-draft')}
+                                    onClick={() =>
+                                        saveAs('non-draft', isOldVersion)
+                                    }
                                 >
                                     {isOldVersion
                                         ? 'Save and Activate'
@@ -213,10 +214,7 @@ const StyleConfig = ({
                     </div>
                     {activeVersion && !activeVersion.draft && !isOldVersion && (
                         <Space align="center" style={{ marginTop: '1em' }}>
-                            <Tooltip
-                                title="Activate this config to make these style changes live"
-                                color="pink"
-                            >
+                            <Tooltip title="Activate this config to make these style changes live">
                                 <Switch
                                     checked={isActive}
                                     onChange={async (bool) => {

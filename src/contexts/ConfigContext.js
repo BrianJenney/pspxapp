@@ -36,6 +36,7 @@ export const ConfigContextProvider = ({ children }) => {
                 oldVersions,
                 setActiveVersion,
                 activeVersion,
+                setOldVersions,
                 setConfigs,
             }}
         >

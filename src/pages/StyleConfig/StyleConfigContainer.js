@@ -82,7 +82,7 @@ const StyleConfigContainer = () => {
         message[type](text);
     };
 
-    const saveAs = async (saveType) => {
+    const saveAs = async (saveType, immediatelyActivate) => {
         const isPreview = saveType === 'draft';
 
         const styles = getAllFormData();
@@ -114,7 +114,7 @@ const StyleConfigContainer = () => {
                     isPreview,
                     spaceid,
                     styles: styleData,
-                    isActive,
+                    isActive: immediatelyActivate ? true : false,
                 });
                 setConfigs((prev) => [...prev, res.data.newConfig]);
                 handleApiResponse('Successfully saved config');
