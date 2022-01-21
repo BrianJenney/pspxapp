@@ -159,6 +159,7 @@ const StyleConfigContainer = () => {
             configs={configs}
             setIsActive={setIsActive}
             isActive={isActive}
+            user={user}
         />
     );
 };

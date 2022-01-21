@@ -3,6 +3,7 @@ import { Space, Button, Tag, Modal, Switch, Tooltip } from 'antd';
 import { StyleConfigVersions } from '../../components/StyleConfigVersions';
 import { StyleConfigForm } from '../../components/StyleConfigForm';
 import styles from './StyleConfig.module.css';
+import { useNavigate } from 'react-router';
 
 const StyleConfig = ({
     setActiveVersion,
@@ -20,7 +21,9 @@ const StyleConfig = ({
     configs,
     setIsActive,
     isActive,
+    user,
 }) => {
+    const navigate = useNavigate();
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -138,18 +141,27 @@ const StyleConfig = ({
                             <StyleConfigForm addToAllForms={addToAllForms} />
                             <div>
                                 <Space>
-                                    <Button
-                                        type="primary"
-                                        style={{ marginTop: '2em' }}
-                                        onClick={() =>
-                                            setFormAmt((prev) => [
-                                                ...prev,
-                                                prev[prev.length - 1] + 1,
-                                            ])
+                                    <Tooltip
+                                        title={
+                                            !user?.hasSubscription
+                                                ? 'Upgrade your subscription to add more styles!'
+                                                : null
                                         }
                                     >
-                                        Add New Rule
-                                    </Button>
+                                        <Button
+                                            type="primary"
+                                            disabled={!user?.hasSubscription}
+                                            style={{ marginTop: '2em' }}
+                                            onClick={() =>
+                                                setFormAmt((prev) => [
+                                                    ...prev,
+                                                    prev[prev.length - 1] + 1,
+                                                ])
+                                            }
+                                        >
+                                            Add New Rule
+                                        </Button>
+                                    </Tooltip>
                                     {((formAmt.length > 1 && idx > 0) ||
                                         activeVersion) && (
                                         <Button
@@ -237,6 +249,16 @@ const StyleConfig = ({
                             </p>
                         </Space>
                     )}
+                    <div style={{ marginTop: '1em' }}>
+                        {!user?.hasSubscription && (
+                            <Button
+                                type="primary"
+                                onClick={() => navigate('/account')}
+                            >
+                                Upgrade my account
+                            </Button>
+                        )}
+                    </div>
                 </div>
                 <div>
                     <StyleConfigVersions

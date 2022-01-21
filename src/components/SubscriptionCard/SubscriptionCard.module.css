@@ -1,0 +1,19 @@
+.checkIcon {
+    width: 20px;
+    fill: #52c41a;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    margin: 1.5em 0;
+}
+
+.feature p {
+    margin: 0;
+    margin-left: 10px;
+}
+
+.cardContainer {
+    text-align: center;
+}

@@ -2,12 +2,16 @@ import React, { useEffect } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import styles from './StyleConfigForm.module.css';
 
 const StyleConfigForm = ({
     addToAllForms,
     defaultVals = { styles: [] },
     isEditable = true,
 }) => {
+    const navigate = useNavigate();
+
     const { control, formState, register, reset, getValues } = useForm({
         readOnly: true,
     });
@@ -148,18 +152,34 @@ const StyleConfigForm = ({
                                                 />
                                             )}
                                             <PlusCircleOutlined
-                                                onClick={() => {
-                                                    append({
-                                                        rule: '',
-                                                        val: '',
-                                                    });
-                                                }}
+                                                onClick={() =>
+                                                    fields.length <
+                                                    process.env
+                                                        .REACT_APP_MAX_STYLES
+                                                        ? append({
+                                                              rule: '',
+                                                              val: '',
+                                                          })
+                                                        : () => {}
+                                                }
                                             />
                                         </Space>
                                     )}
                                 </Space>
                             </div>
                         ))}
+
+                        {fields.length >= process.env.REACT_APP_MAX_STYLES && (
+                            <h2 className={styles.upgradeText}>
+                                Need more styles?{' '}
+                                <span
+                                    className={styles.clickableSpan}
+                                    onClick={() => navigate('/account')}
+                                >
+                                    Upgrade your account
+                                </span>
+                            </h2>
+                        )}
                     </>
                 </>
             </form>

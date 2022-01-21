@@ -1,0 +1,11 @@
+.clickableSpan {
+    color: #1890ff;
+}
+
+.clickableSpan:hover {
+    cursor: pointer;
+}
+
+.upgradeText {
+    margin-top: 1em;
+}

@@ -1,11 +1,37 @@
 import React, { useState } from 'react';
-import { Input, Button, Space, Form, Tag, Modal } from 'antd';
+import { Input, Button, Space, Form, Tag, Modal, Alert } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { apiClient } from '../../utils/apiClient';
 import styles from './AccountInfo.module.css';
+import { SubscriptionCard } from '../../components';
 
 const AccountInfo = ({ user, addOrRemoveUser }) => {
     const [isHidden, setIsHidden] = useState(false);
+
+    const subscriptions = [
+        {
+            title: 'Basic',
+            price: 50,
+            basis: 'month',
+            features: [
+                '5 rules',
+                '10 style per rule',
+                '5 users',
+                'Engineering Support (Limited)',
+            ],
+        },
+        {
+            title: 'Pro',
+            price: 100,
+            basis: 'month',
+            features: [
+                '10 rules',
+                '15 styles per rule',
+                '15 users',
+                '24/7 Engineering Support',
+            ],
+        },
+    ];
 
     const onFinish = (values) => {
         addOrRemoveUser({
@@ -77,7 +103,7 @@ const AccountInfo = ({ user, addOrRemoveUser }) => {
                 <br />
                 <div style={{ marginTop: '2em' }}>
                     <code>
-                        {`<script src="https://cdn.jsdelivr.net/gh/BrianJenney/slapjunky@stage/public/css.js"></script>`}
+                        {`<script src="https://cdn.jsdelivr.net/gh/BrianJenney/pspx@latest/pspx.js"></script>`}
                     </code>
                     <br />
                     <code>
@@ -92,19 +118,14 @@ if (window.pspx) {
                 </div>
                 <hr />
                 {!user?.hasSubscription && (
-                    <>
-                        <p>
-                            Want to add more users, get dedicated support from
-                            our engineering team and increase your monthly
-                            active user limit?
-                        </p>
-                        <Button
-                            type="primary"
-                            onClick={() => getCheckoutLink()}
-                        >
-                            Upgrade your account
-                        </Button>
-                    </>
+                    <div className={styles.subscriptions}>
+                        {subscriptions.map((sub) => (
+                            <SubscriptionCard
+                                {...sub}
+                                clickHandler={getCheckoutLink}
+                            />
+                        ))}
+                    </div>
                 )}
 
                 {user?.hasSubscription && (
@@ -199,6 +220,21 @@ if (window.pspx) {
                         </Space>
                     </div>
                 )}
+            </div>
+
+            <div className={styles.supportSection}>
+                <h3>
+                    NEED HELP? Call us at{' '}
+                    {user?.hasSubscription
+                        ? `925 - 237 - 6216 `
+                        : `(Upgrade your account to get the digits) `}
+                    or email brianjenney83@gmail.com
+                </h3>
+                <small>
+                    Yes, that is an actual number to a real human and yes,
+                    that's the developer's real email address. We take customer
+                    service seriously!
+                </small>
             </div>
         </div>
     );

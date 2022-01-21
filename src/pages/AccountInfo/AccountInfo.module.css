@@ -16,6 +16,16 @@
     cursor: pointer;
 }
 
+.subscriptions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.supportSection {
+    text-align: center;
+    margin-top: 2em;
+}
+
 @media screen and (max-width: 800px) {
     .codeContainer {
         margin-top: 2em;
