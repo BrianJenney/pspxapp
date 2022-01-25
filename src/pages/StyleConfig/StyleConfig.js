@@ -92,6 +92,9 @@ const StyleConfig = ({
                                                         style={{
                                                             marginTop: '2em',
                                                         }}
+                                                        disabled={
+                                                            !user?.hasSubscription
+                                                        }
                                                         onClick={() =>
                                                             setFormAmt(
                                                                 (prev) => [

@@ -1,0 +1,17 @@
+.instructionImg {
+    width: 300px;
+}
+
+.docContainer {
+    margin: 2em 3em;
+}
+
+.listNumber {
+    font-weight: 700;
+    font-size: 1.25em;
+}
+
+.headline {
+    margin: auto;
+    text-align: center;
+}

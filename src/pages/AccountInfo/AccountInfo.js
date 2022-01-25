@@ -5,18 +5,18 @@ import { apiClient } from '../../utils/apiClient';
 import styles from './AccountInfo.module.css';
 import { SubscriptionCard } from '../../components';
 
-const AccountInfo = ({ user, addOrRemoveUser }) => {
+const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
     const [isHidden, setIsHidden] = useState(false);
 
     const subscriptions = [
         {
             title: 'Basic',
-            price: 50,
-            basis: 'month',
+            price: 0,
+            basis: 'FOREVER',
             features: [
-                '5 rules',
-                '10 style per rule',
-                '5 users',
+                '1 rules',
+                '5 style per rule',
+                '1 user',
                 'Engineering Support (Limited)',
             ],
         },
@@ -27,7 +27,7 @@ const AccountInfo = ({ user, addOrRemoveUser }) => {
             features: [
                 '10 rules',
                 '15 styles per rule',
-                '15 users',
+                '10 users',
                 '24/7 Engineering Support',
             ],
         },
@@ -97,26 +97,6 @@ const AccountInfo = ({ user, addOrRemoveUser }) => {
                 </Button>
             </Space>
             <div className={styles.codeContainer}>
-                <code>
-                    <b>Add this script to your site:</b>
-                </code>
-                <br />
-                <div style={{ marginTop: '2em' }}>
-                    <code>
-                        {`<script src="https://cdn.jsdelivr.net/gh/BrianJenney/pspx@latest/pspx.js"></script>`}
-                    </code>
-                    <br />
-                    <code>
-                        <pre>
-                            {`<script>
-if (window.pspx) {
-    window.pspx.init({ spaceid: <APIKEY>, isPreview: <ISPREVIEW> });
-} 
-</script>`}
-                        </pre>
-                    </code>
-                </div>
-                <hr />
                 {!user?.hasSubscription && (
                     <div className={styles.subscriptions}>
                         {subscriptions.map((sub) => (
@@ -218,6 +198,11 @@ if (window.pspx) {
                                 </Button>
                             </Form>
                         </Space>
+                        <>
+                            {apiError ? (
+                                <Alert type="error" message={apiError} />
+                            ) : null}
+                        </>
                     </div>
                 )}
             </div>

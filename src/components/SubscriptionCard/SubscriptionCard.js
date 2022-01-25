@@ -8,7 +8,9 @@ const SubscriptionCard = ({ price, title, features, basis, clickHandler }) => {
             <div className={styles.cardContainer}>
                 <h1>{title.toUpperCase()}</h1>
                 <p>
-                    ${price} per {basis}
+                    {!price
+                        ? 'FREE'
+                        : `$${price} per ${basis} (Cancel Anytime)`}
                 </p>
                 <hr />
                 {features.map((feature) => (
@@ -28,9 +30,13 @@ const SubscriptionCard = ({ price, title, features, basis, clickHandler }) => {
                         <p>{feature}</p>
                     </div>
                 ))}
-                <Button type="primary" onClick={clickHandler}>
-                    Upgrade your account
-                </Button>
+                {price ? (
+                    <Button type="primary" onClick={clickHandler}>
+                        Upgrade your account
+                    </Button>
+                ) : (
+                    <></>
+                )}
             </div>
         </Card>
     );

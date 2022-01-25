@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { message } from 'antd';
+import validateCss from 'css-validator';
 import { Loader } from '../../components';
 import vkbeautify from 'vkbeautify';
 import { apiClient } from '../../utils/apiClient';
@@ -72,7 +73,8 @@ const StyleConfigContainer = () => {
         const allVals = retVal
             .filter((val) => val.element)
             .map((val) => generatePreview(val));
-        setCssPreview(vkbeautify.css(allVals.join('')));
+        const cssString = allVals.join('');
+        setCssPreview(vkbeautify.css(cssString));
     };
 
     const handleApiResponse = (

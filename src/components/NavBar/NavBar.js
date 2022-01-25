@@ -26,6 +26,12 @@ const NavBar = () => {
                     >
                         Style Configurator
                     </p>
+                    <p
+                        onClick={() => navigate('/docs')}
+                        className={styles.link}
+                    >
+                        Docs
+                    </p>
                 </div>
             </header>
         </>

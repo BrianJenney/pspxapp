@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { StyleConfigContainer } from '../pages/StyleConfig';
 import { AccountInfoContainer } from '../pages/AccountInfo';
 import { SignIn } from '../pages/SignIn';
+import { Docs } from '../pages/Docs';
 import { LogoutButton } from '../components';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -31,11 +32,14 @@ const PageRoutes = () => {
 
     return (
         <>
-            <Routes>
-                <Route path="/" element={<SignIn />} />
-                <Route path="/configs" element={<StyleConfigContainer />} />
-                <Route path="/account" element={<AccountInfoContainer />} />
-            </Routes>
+            <div style={{ minHeight: '500px' }}>
+                <Routes>
+                    <Route path="/" element={<SignIn />} />
+                    <Route path="/configs" element={<StyleConfigContainer />} />
+                    <Route path="/account" element={<AccountInfoContainer />} />
+                    <Route path="/docs" element={<Docs />} />
+                </Routes>
+            </div>
             {!isSignInPage && (
                 <footer
                     style={{
