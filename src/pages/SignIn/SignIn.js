@@ -131,6 +131,10 @@ const SignIn = () => {
                 </div>
             </section>
 
+            <section style={{ marginTop: '3em', textAlign: 'center' }}>
+                <LoginButton showLogin={false} />
+            </section>
+
             <section
                 style={{
                     marginTop: '3em',

@@ -7,6 +7,7 @@ import cssPreview from '../../assets/css_preview.png';
 import activateStyle from '../../assets/activate_style.png';
 import selectOldVersion from '../../assets/select_old_version.png';
 import activateOldVersion from '../../assets/activate_old_version.png';
+import { LoginButton } from '../../components';
 import styles from './Docs.module.css';
 
 const Docs = () => {
@@ -14,8 +15,8 @@ const Docs = () => {
         {
             rule: 'Add the following script to your site after the body',
             child: (
-                <div className={styles.codeContainer}>
-                    <div>
+                <div>
+                    <div className={styles.codeContainer}>
                         <code>
                             {`<script src="https://cdn.jsdelivr.net/gh/BrianJenney/pspx@latest/pspx.js"></script>`}
                         </code>
@@ -151,15 +152,18 @@ window.pspx.init({ spaceid: <APIKEY>, isPreview: <ISPREVIEW> });
     return (
         <section className={styles.docContainer}>
             <h2 className={styles.headline}>Getting Started with PSPX</h2>
+            <section className={styles.createAccountBtn}>
+                <LoginButton showLogin={false} />
+            </section>
             {instructions.map(({ rule, child }, i) => (
-                <>
+                <div key={rule}>
                     <p>
                         <span className={styles.listNumber}>{i + 1}.</span>{' '}
                         {rule}
                     </p>
                     {child}
                     <hr />
-                </>
+                </div>
             ))}
 
             <br />

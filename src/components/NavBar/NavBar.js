@@ -9,7 +9,10 @@ const NavBar = () => {
     return (
         <>
             <header className={styles.header}>
-                <div className={styles.iconWrapper}>
+                <div
+                    onClick={() => navigate('/')}
+                    className={styles.iconWrapper}
+                >
                     <p className={styles.link}>PSPX</p>
                     <CodeTwoTone twoToneColor="#eb2f96" />
                 </div>

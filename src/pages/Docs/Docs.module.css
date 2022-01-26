@@ -1,3 +1,8 @@
+.codeContainer {
+    overflow-x: scroll;
+    padding: 0 1em;
+}
+
 .instructionImg {
     width: 300px;
 }
@@ -14,4 +19,14 @@
 .headline {
     margin: auto;
     text-align: center;
+}
+
+.createAccountBtn {
+    margin: 1em;
+}
+
+@media screen and (max-width: 600px) {
+    .instructionImg {
+        width: 100%;
+    }
 }

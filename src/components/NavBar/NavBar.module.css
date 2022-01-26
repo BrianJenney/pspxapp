@@ -20,6 +20,10 @@
     align-items: center;
 }
 
+.iconWrapper:hover {
+    cursor: pointer;
+}
+
 .iconWrapper p {
     margin: 0 10px;
 }

@@ -16,7 +16,7 @@ const App = () => {
                 <UserContextProvider>
                     <ConfigContextProvider>
                         <Badge.Ribbon
-                            style={{ right: 0 }}
+                            style={{ right: 0, top: 0 }}
                             placement="end"
                             text="Beta"
                         ></Badge.Ribbon>
