@@ -6,11 +6,10 @@ import { SignIn } from '../pages/SignIn';
 import { Docs } from '../pages/Docs';
 import { LogoutButton } from '../components';
 import { Loader } from '../components';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const ProtectedRoute = ({ children }) => {
-    const navigate = useNavigate();
     const { isAuthenticated, isLoading } = useAuth0();
 
     if (isLoading) return <Loader />;
@@ -24,15 +23,16 @@ const ProtectedRoute = ({ children }) => {
 const PageRoutes = () => {
     const [isSignInPage, setIsSignInPage] = useState(true);
 
-    let path = window.location.pathname;
+    const { pathname } = useLocation();
 
     useEffect(() => {
-        if (path === '/') {
+        console.log(pathname);
+        if (pathname === '/') {
             setIsSignInPage(true);
         } else {
             setIsSignInPage(false);
         }
-    }, [path]);
+    }, [pathname]);
 
     return (
         <>

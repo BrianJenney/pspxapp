@@ -108,7 +108,7 @@ const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
                     </div>
                 )}
 
-                {user?.hasSubscription && (
+                {user?.hasSubscription && user?.isAdmin && (
                     <div>
                         <h2>Invite Users</h2>
                         {(user?.spaceUsers || [])
