@@ -65,11 +65,8 @@ const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
 
     // request a checkout link from stripe with the subscription id
     const getCheckoutLink = async () => {
-        const sessionData = await apiClient('/payments/startcheckout', {
-            priceId:
-                process.env.REACT_APP_ENV === 'production'
-                    ? 'price_1K9sWAJRPNNdaytqzYdyr9Jm'
-                    : 'price_1KAPulJRPNNdaytq61FIfuRQ',
+        const sessionData = await apiClient('payments/startcheckout', {
+            priceId: process.env.REACT_APP_PRICE_ID,
             spaceId: user?.spaceKey,
             userId: user?._id,
         });
