@@ -119,6 +119,10 @@ const StyleConfigContainer = () => {
                     isActive: immediatelyActivate ? true : false,
                 });
                 setConfigs((prev) => [...prev, res.data.newConfig]);
+                setActiveVersion((prev) => ({
+                    ...prev,
+                    ...res.data.newConfig,
+                }));
                 handleApiResponse('Successfully saved config');
             }
         } catch (e) {
