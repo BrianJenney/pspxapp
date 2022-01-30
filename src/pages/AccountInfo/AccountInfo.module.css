@@ -11,6 +11,10 @@
     cursor: pointer;
 }
 
+.cardContainer {
+    margin: 0 1em;
+}
+
 .subscriptions {
     display: flex;
     justify-content: space-around;

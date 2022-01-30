@@ -98,10 +98,12 @@ const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
                     {!user?.hasSubscription && (
                         <div className={styles.subscriptions}>
                             {subscriptions.map((sub) => (
-                                <SubscriptionCard
-                                    {...sub}
-                                    clickHandler={getCheckoutLink}
-                                />
+                                <div className={styles.cardContainer}>
+                                    <SubscriptionCard
+                                        {...sub}
+                                        clickHandler={getCheckoutLink}
+                                    />
+                                </div>
                             ))}
                         </div>
                     )}

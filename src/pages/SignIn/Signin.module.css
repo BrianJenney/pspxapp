@@ -39,6 +39,24 @@
     min-height: 400px;
 }
 
+.videoOne {
+    width: 25%;
+    margin: 1em;
+    box-shadow: 5px 8px 24px 5px rgba(208, 216, 243, 0.6);
+}
+
+.videoTwo {
+    width: 70%;
+    margin: 1em;
+    box-shadow: 5px 8px 24px 5px rgba(208, 216, 243, 0.6);
+}
+
+.videoSection {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 @media only screen and (max-width: 850px) {
     .header {
         flex-wrap: wrap-reverse;

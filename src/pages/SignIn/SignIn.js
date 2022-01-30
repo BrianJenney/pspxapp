@@ -1,8 +1,10 @@
 import React from 'react';
-import { LoginButton } from '../../components';
 import { useAuth0 } from '@auth0/auth0-react';
-import DesignerAvatar from '../../assets/designer-avatar.svg';
 import { useNavigate } from 'react-router-dom';
+import { LoginButton } from '../../components';
+import DesignerAvatar from '../../assets/designer-avatar.svg';
+import StepOne from '../../assets/pspx_step1.mp4';
+import StepTwo from '../../assets/pspx_step2.mp4';
 import styles from './Signin.module.css';
 
 const SignIn = () => {
@@ -239,6 +241,18 @@ const SignIn = () => {
                         inspect the code
                     </h2>
                 </div>
+            </section>
+
+            <section className={styles.videoSection}>
+                <video className={styles.videoOne} loop autoPlay muted>
+                    <source autoPlay loop src={StepOne} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+
+                <video className={styles.videoTwo} loop autoPlay muted>
+                    <source autoPlay loop src={StepTwo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
             </section>
         </div>
     );

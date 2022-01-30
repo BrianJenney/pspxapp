@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import finishedStyle from '../../assets/finished_style.png';
 import generatePreview from '../../assets/generate_preview.png';
 import selectElement from '../../assets/select_element.png';
@@ -11,6 +12,9 @@ import { LoginButton } from '../../components';
 import styles from './Docs.module.css';
 
 const Docs = () => {
+    const { user } = useContext(UserContext);
+    const isSubscribed = user?.hasSubscription;
+
     const instructions = [
         {
             rule: 'Add the following script to your site after the body',
@@ -39,7 +43,7 @@ window.pspx.init({ spaceid: <APIKEY>, isPreview: <ISPREVIEW> });
             child: '',
         },
         {
-            rule: 'Add the element by name, id or class name to the style configurator',
+            rule: 'Add the element by name, id or class name to the style configurator.',
             child: (
                 <img
                     className={styles.instructionImg}
@@ -59,7 +63,7 @@ window.pspx.init({ spaceid: <APIKEY>, isPreview: <ISPREVIEW> });
             ),
         },
         {
-            rule: 'Generate a preview of the CSS from your style configurator',
+            rule: 'Generate a preview of the CSS from your style configurator.',
             child: (
                 <>
                     <img
@@ -79,12 +83,12 @@ window.pspx.init({ spaceid: <APIKEY>, isPreview: <ISPREVIEW> });
             rule: (
                 <>
                     If you'd like to to preview the styles without making them
-                    live yet. Save your style as a draft and preview it on your
-                    website or staging environment. Remember, in order for the
-                    preview to work, you must add <code>isPreview</code> to the
-                    code in the script at step 1. One way to achieve this is to
-                    have some additional code that reads that value from the url
-                    as a query string like so{' '}
+                    live yet, you can save your style as a draft and preview it
+                    on your website or staging environment. Remember, in order
+                    for the preview to work, you must add <code>isPreview</code>{' '}
+                    to the code in the script at step 1. One way to achieve this
+                    is to have some additional code that reads that value from
+                    the url as a query string like so{' '}
                     <code>OurCoolSite.com?isPreview=true </code>
                 </>
             ),
@@ -101,7 +105,7 @@ window.pspx.init({ spaceid: <APIKEY>, isPreview: <ISPREVIEW> });
             child: null,
         },
         {
-            rule: 'To make the style live on the site you must activate the style',
+            rule: 'To make the style live on the site you must activate the style.',
             child: (
                 <img
                     className={styles.instructionImg}
@@ -111,7 +115,7 @@ window.pspx.init({ spaceid: <APIKEY>, isPreview: <ISPREVIEW> });
             ),
         },
         {
-            rule: 'Refresh your browser to see the changes live on your site',
+            rule: 'Refresh your browser to see the changes live on your site.',
             child: (
                 <img
                     className={styles.instructionImg}
@@ -152,9 +156,11 @@ window.pspx.init({ spaceid: <APIKEY>, isPreview: <ISPREVIEW> });
     return (
         <section className={styles.docContainer}>
             <h2 className={styles.headline}>Getting Started with PSPX</h2>
-            <section className={styles.createAccountBtn}>
-                <LoginButton showLogin={false} />
-            </section>
+            {isSubscribed && (
+                <section className={styles.createAccountBtn}>
+                    <LoginButton showLogin={false} />
+                </section>
+            )}
             {instructions.map(({ rule, child }, i) => (
                 <div key={rule}>
                     <p>
