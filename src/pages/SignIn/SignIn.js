@@ -52,6 +52,18 @@ const SignIn = () => {
                 </div>
             </section>
 
+            <section className={styles.videoSection}>
+                <video className={styles.videoOne} loop autoPlay muted>
+                    <source autoPlay loop src={StepOne} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+
+                <video className={styles.videoTwo} loop autoPlay muted>
+                    <source autoPlay loop src={StepTwo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </section>
+
             <section style={{ marginTop: '3em' }}>
                 <div style={{ textAlign: 'center' }}>
                     <h2
@@ -241,18 +253,6 @@ const SignIn = () => {
                         inspect the code
                     </h2>
                 </div>
-            </section>
-
-            <section className={styles.videoSection}>
-                <video className={styles.videoOne} loop autoPlay muted>
-                    <source autoPlay loop src={StepOne} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-
-                <video className={styles.videoTwo} loop autoPlay muted>
-                    <source autoPlay loop src={StepTwo} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
             </section>
         </div>
     );
