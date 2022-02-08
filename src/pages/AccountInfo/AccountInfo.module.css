@@ -7,6 +7,10 @@
     padding-top: 5em;
 }
 
+.inviteUsers {
+    margin: 0 1em;
+}
+
 .deleteIcon:hover {
     cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Button, Space, Form, Tag, Modal, Alert } from 'antd';
+import { Input, Button, Space, Form, Tag, Modal, Alert, message } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { apiClient } from '../../utils/apiClient';
 import styles from './AccountInfo.module.css';
@@ -39,6 +39,11 @@ const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
             email: values.useremail,
             spaceId: user?.spaceId,
         });
+
+        navigator.clipboard.writeText(
+            `You've been invited to use PSPX https://www.pspxapp.com -> sign in to access your workspace 😎.`
+        );
+        message.success('Invite copied to clipboard');
     };
 
     const showDeleteConfirm = (email, userid) => {
@@ -109,8 +114,9 @@ const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
                     )}
 
                     {user?.hasSubscription && user?.isAdmin && (
-                        <div>
+                        <div className={styles.inviteUsers}>
                             <h2>Invite Users</h2>
+
                             {(user?.spaceUsers || [])
                                 .filter((u) => u._id !== user._id)
                                 .map((u) => (
@@ -156,10 +162,7 @@ const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
                                     </div>
                                 ))}
                             <Space>
-                                <Form
-                                    style={{ display: 'flex' }}
-                                    onFinish={onFinish}
-                                >
+                                <Form onFinish={onFinish}>
                                     <Form.Item
                                         label="User Email"
                                         name="useremail"
@@ -171,35 +174,45 @@ const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
                                             },
                                         ]}
                                     >
-                                        <Input />
+                                        <span style={{ display: 'flex' }}>
+                                            <Input />
+                                            <Button
+                                                htmlType="submit"
+                                                type="primary"
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent:
+                                                        'space-between',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                Send
+                                                <svg
+                                                    width="20px"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                    />
+                                                </svg>
+                                            </Button>
+                                        </span>
                                     </Form.Item>
-                                    <Button
-                                        htmlType="submit"
-                                        type="primary"
-                                        style={{
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
-                                        }}
-                                    >
-                                        Send
-                                        <svg
-                                            width="20px"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                            />
-                                        </svg>
-                                    </Button>
                                 </Form>
                             </Space>
+                            <div>
+                                <small>
+                                    Once a user signs in they will be
+                                    automatically added to the workspace. We DO
+                                    NOT send emails.
+                                </small>
+                            </div>
                             <>
                                 {apiError ? (
                                     <Alert type="error" message={apiError} />

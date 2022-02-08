@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { message } from 'antd';
-import validateCss from 'css-validator';
 import { Loader } from '../../components';
 import vkbeautify from 'vkbeautify';
 import { apiClient } from '../../utils/apiClient';
