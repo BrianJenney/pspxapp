@@ -18,7 +18,7 @@ const AccountInfoContainer = () => {
         const urlPath =
             method === 'add' ? 'addusertospace' : 'removeuserfromspace';
         try {
-            const data = await apiClient(`styles/${urlPath}`, {
+            const data = await apiClient(`user/${urlPath}`, {
                 email,
                 spaceId,
                 userid,

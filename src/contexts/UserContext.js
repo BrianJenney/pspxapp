@@ -19,7 +19,7 @@ export const UserContextProvider = ({ children }) => {
             const userid = auth0User?.sub.split('|')[1];
             try {
                 const data = await apiClient(
-                    `styles/getUser?userid=${userid}`,
+                    `user/getUser?userid=${userid}`,
                     {},
                     { method: 'GET' }
                 );
