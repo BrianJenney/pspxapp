@@ -11,11 +11,15 @@ const LogoutButton = ({ showLogin = true }) => {
             <Button
                 size="large"
                 type="primary"
+                style={{ height: 'auto', lineHeight: 1 }}
                 onClick={() =>
                     loginWithRedirect({ returnTo: window.location.origin })
                 }
             >
-                Create a FREE Account
+                Create a FREE Account <br />{' '}
+                <small className={styles.buttonDisclaimer}>
+                    (it takes like 4.5 seconds)
+                </small>
             </Button>
             {showLogin && (
                 <p>

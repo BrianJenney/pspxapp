@@ -22,11 +22,17 @@ const ProtectedRoute = ({ children }) => {
 
 const PageRoutes = () => {
     const [isSignInPage, setIsSignInPage] = useState(true);
+    const [showLogoutButton, setShowLogoutButton] = useState(true);
 
     const { pathname } = useLocation();
 
     useEffect(() => {
-        console.log(pathname);
+        if (pathname === '/docs') {
+            setShowLogoutButton(false);
+        } else {
+            setShowLogoutButton(true);
+        }
+
         if (pathname === '/') {
             setIsSignInPage(true);
         } else {
@@ -67,7 +73,7 @@ const PageRoutes = () => {
                         marginTop: '1em',
                     }}
                 >
-                    <LogoutButton />
+                    {showLogoutButton && <LogoutButton />}
                 </footer>
             )}
         </>

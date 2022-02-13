@@ -5,3 +5,8 @@
 .fakeLink:hover {
     cursor: pointer;
 }
+
+.buttonDisclaimer {
+    font-size: 0.75em;
+    margin: 0;
+}

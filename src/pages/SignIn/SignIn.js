@@ -265,6 +265,18 @@ const SignIn = () => {
                         </h2>
                     </div>
                 </section>
+                <section className={styles.contactUs}>
+                    <h2>
+                        Wanna chat? Email me at{' '}
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="mailto:brianjenney83@gmail.com"
+                        >
+                            brianjenney83@gmail.com
+                        </a>
+                    </h2>
+                </section>
             </div>
         </>
     );
