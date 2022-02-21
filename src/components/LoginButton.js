@@ -17,9 +17,7 @@ const LogoutButton = ({ showLogin = true }) => {
                 }
             >
                 Create a FREE Account <br />{' '}
-                <small className={styles.buttonDisclaimer}>
-                    (it takes like 4.5 seconds)
-                </small>
+                <small className={styles.buttonDisclaimer}>in 10 seconds</small>
             </Button>
             {showLogin && (
                 <p>
