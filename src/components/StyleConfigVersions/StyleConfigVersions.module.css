@@ -1,0 +1,8 @@
+.hover :hover {
+    cursor: pointer;
+}
+
+.oldVersions {
+    height: 300px;
+    overflow-y: scroll;
+}

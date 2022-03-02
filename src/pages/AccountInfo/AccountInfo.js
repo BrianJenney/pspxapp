@@ -22,7 +22,7 @@ const AccountInfo = ({ user, addOrRemoveUser, apiError }) => {
         },
         {
             title: 'Pro',
-            price: 100,
+            price: 19.99,
             basis: 'month',
             features: [
                 '10 rules',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge, Space, Card } from 'antd';
-import './StyleConfigVersions.css';
+import styles from './StyleConfigVersions.module.css';
 
 const StyleConfigVersions = ({ configs, oldVersions, setActiveVersion }) => {
     if (!(configs || []).length) {
@@ -34,21 +34,22 @@ const StyleConfigVersions = ({ configs, oldVersions, setActiveVersion }) => {
             ))}
 
             <h3>Version History</h3>
-
-            {sortByVersion(oldVersions).map((config) => (
-                <div key={config.version}>
-                    <Space
-                        className="hover"
-                        onClick={() => setActiveVersion(config)}
-                    >
-                        <p>V.{config.version}</p>
-                        <p>
-                            {new Date(config.createdAt).toLocaleString() ||
-                                new Date().toLocaleString()}
-                        </p>
-                    </Space>
-                </div>
-            ))}
+            <div className={styles.oldVersions}>
+                {sortByVersion(oldVersions).map((config) => (
+                    <div key={config.version}>
+                        <Space
+                            className={styles.hover}
+                            onClick={() => setActiveVersion(config)}
+                        >
+                            <p>V.{config.version}</p>
+                            <p>
+                                {new Date(config.createdAt).toLocaleString() ||
+                                    new Date().toLocaleString()}
+                            </p>
+                        </Space>
+                    </div>
+                ))}
+            </div>
         </Card>
     );
 };
