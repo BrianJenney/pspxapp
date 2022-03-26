@@ -254,12 +254,23 @@ const StyleConfig = ({
                     )}
                     <div style={{ marginTop: '1em' }}>
                         {!user?.hasSubscription && (
-                            <Button
-                                type="primary"
-                                onClick={() => navigate('/account')}
-                            >
-                                Upgrade my account
-                            </Button>
+                            <>
+                                <h2 className={styles.upgradeText}>
+                                    Need more styles?{' '}
+                                    <span
+                                        className={styles.clickableSpan}
+                                        onClick={() => navigate('/account')}
+                                    >
+                                        Upgrade your account
+                                    </span>
+                                </h2>
+                                <Button
+                                    type="primary"
+                                    onClick={() => navigate('/account')}
+                                >
+                                    Upgrade my account
+                                </Button>
+                            </>
                         )}
                     </div>
                 </div>
