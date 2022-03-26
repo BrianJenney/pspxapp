@@ -16,7 +16,7 @@ const StyleConfigVersions = ({ configs, oldVersions, setActiveVersion }) => {
             {configs.map((config) => (
                 <div key={config.version}>
                     <Space
-                        className="hover"
+                        className={styles.hover}
                         onClick={() => setActiveVersion(config)}
                     >
                         <p>V.{config.version}</p>
